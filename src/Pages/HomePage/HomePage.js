@@ -33,8 +33,8 @@ const HomePage = ({addEmployee}) => {
       id:Id,
       firstName:info.firstName,
       lastName:info.lastName,
-      DateOfBrith:birthday,
-      StartDate:startDate,
+      DateOfBrith:birthday.toLocaleDateString('en-US'),
+      StartDate:startDate.toLocaleDateString('en-Us'),
       street:info.street,
       city:info.city,
       State:state,
@@ -47,7 +47,7 @@ const HomePage = ({addEmployee}) => {
     <div className="background">
       <Header />
       <div className="container">
-        <form>
+        <form onSubmit={(e) => saveEmployee(e)}>
           <div className="form-container">
             <div className="left-side">
               <div className="input-container">
@@ -58,6 +58,7 @@ const HomePage = ({addEmployee}) => {
                   placeholder="First Name"
                   name="firstName"
                   onChange={handelInputChange}
+                  required
                 />
               </div>
               <div className="input-container">
@@ -68,6 +69,7 @@ const HomePage = ({addEmployee}) => {
                   placeholder="Last Name"
                   name="lastName"
                   onChange={handelInputChange}
+                  required
                 />
               </div>
               <div className="input-container">
@@ -78,6 +80,7 @@ const HomePage = ({addEmployee}) => {
                   onChange={(date) => setBirthDay(date)}
                   dateFormat="dd/mm/yyyy"
                   isClearable
+                  required
                 />
               </div>
               <div className="input-container">
@@ -88,6 +91,7 @@ const HomePage = ({addEmployee}) => {
                   onChange={(date) => setStartDate(date)}
                   dateFormat="dd/mm/yyyy"
                   isClearable
+                  required
                 />
               </div>
             </div>
@@ -102,6 +106,7 @@ const HomePage = ({addEmployee}) => {
                     placeholder="Street"
                     name="street"
                     onChange={handelInputChange}
+                    required
                   />
                 </div>
                 <div className="input-container-right">
@@ -112,6 +117,7 @@ const HomePage = ({addEmployee}) => {
                     placeholder="City"
                     name="city"
                     onChange={handelInputChange}
+                    required
                   />
                 </div>
                 <div className="input-container-right">
@@ -147,7 +153,7 @@ const HomePage = ({addEmployee}) => {
             </div>
           </div>
           <div className="button">
-            <button className="submit" onClick={(e) => saveEmployee(e)}>
+            <button className="submit" type='submit'>
               Save
             </button>
           </div>
