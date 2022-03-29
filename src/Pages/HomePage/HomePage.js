@@ -6,10 +6,43 @@ import Select from 'react-select'
 import { departments, states } from '../../data/data'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-const HomePage = () => {
+const HomePage = ({addEmployee}) => {
+  const[Id,SetId]=useState(1)
   const [startDate, setStartDate] = useState(new Date())
   const [birthday, setBirthDay] = useState(String)
   const [state, setState] = useState(states[0].value)
+  const [department, setDepartment] = useState(departments[0].value)
+  const [info, setInfo] = useState({
+    firstName: '',
+    lastName: '',
+    street: '',
+    city: '',
+    zipCode: '',
+  })
+  const handelInputChange = (e) => {
+    const value = e.target.value
+    setInfo({
+      ...info,
+      [e.target.name]: value,
+    })
+  }
+  const saveEmployee = (e) => {
+    e.preventDefault()
+    SetId(Id+1);
+    const EmployeeData={
+      id:Id,
+      firstName:info.firstName,
+      lastName:info.lastName,
+      DateOfBrith:birthday,
+      StartDate:startDate,
+      street:info.street,
+      city:info.city,
+      State:state,
+      zipCode:info.zipCode,
+      Department:department
+    }
+    addEmployee(EmployeeData)
+  }
   return (
     <div className="background">
       <Header />
@@ -19,11 +52,23 @@ const HomePage = () => {
             <div className="left-side">
               <div className="input-container">
                 <label htmlFor="firstName">First Name:</label>
-                <input type="text" id="firstName" placeholder="First Name" />
+                <input
+                  type="text"
+                  id="firstName"
+                  placeholder="First Name"
+                  name="firstName"
+                  onChange={handelInputChange}
+                />
               </div>
               <div className="input-container">
                 <label htmlFor="lastName">Last Name:</label>
-                <input type="text" id="lastName" placeholder="Last Name" />
+                <input
+                  type="text"
+                  id="lastName"
+                  placeholder="Last Name"
+                  name="lastName"
+                  onChange={handelInputChange}
+                />
               </div>
               <div className="input-container">
                 <label htmlFor="birthday">Date of Birth:</label>
@@ -51,11 +96,23 @@ const HomePage = () => {
                 <legend>Address</legend>
                 <div className="input-container-right">
                   <label htmlFor="street">Street:</label>
-                  <input id="street" type="text" placeholder="Street" />
+                  <input
+                    id="street"
+                    type="text"
+                    placeholder="Street"
+                    name="street"
+                    onChange={handelInputChange}
+                  />
                 </div>
                 <div className="input-container-right">
                   <label htmlFor="city">City:</label>
-                  <input id="city" type="text" placeholder="City" />
+                  <input
+                    id="city"
+                    type="text"
+                    placeholder="City"
+                    name="city"
+                    onChange={handelInputChange}
+                  />
                 </div>
                 <div className="input-container-right">
                   <label htmlFor="state">State:</label>
@@ -69,17 +126,30 @@ const HomePage = () => {
                 </div>
                 <div className="input-container-right">
                   <label htmlFor="zip-code">Zip Code:</label>
-                  <input id="zip-code" type="number" placeholder="Zip Code" />
+                  <input
+                    id="zip-code"
+                    type="number"
+                    placeholder="Zip Code"
+                    name="zipCode"
+                    onChange={handelInputChange}
+                  />
                 </div>
               </fieldset>
               <div className="input-container">
                 <label htmlFor="department">Department:</label>
-                <Select options={departments}></Select>
+                <Select
+                  options={departments}
+                  aira-label="departments"
+                  placeholder={departments[0].value}
+                  onChange={(e) => setDepartment(e.value)}
+                ></Select>
               </div>
             </div>
           </div>
           <div className="button">
-            <button className="submit">Save</button>
+            <button className="submit" onClick={(e) => saveEmployee(e)}>
+              Save
+            </button>
           </div>
         </form>
       </div>
