@@ -6,6 +6,7 @@ import Select from 'react-select'
 import { departments, states } from '../../data/data'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import Modal from '../../components/Modal/Modal'
 const HomePage = ({addEmployee}) => {
   const[Id,SetId]=useState(1)
   const [startDate, setStartDate] = useState(new Date())
@@ -19,6 +20,7 @@ const HomePage = ({addEmployee}) => {
     city: '',
     zipCode: '',
   })
+  const[open,setOpen]=useState(false)
   const handelInputChange = (e) => {
     const value = e.target.value
     setInfo({
@@ -42,7 +44,14 @@ const HomePage = ({addEmployee}) => {
       Department:department
     }
     addEmployee(EmployeeData)
+    setOpen(true)
+    //rest inputs value
+    const inputs=document.getElementsByTagName('input')
+    for(let i=0;i<inputs.length;i++){
+      inputs[i].value=''
+    }
   }
+  
   return (
     <div className="background">
       <Header />
@@ -159,6 +168,7 @@ const HomePage = ({addEmployee}) => {
           </div>
         </form>
       </div>
+      {open ? <Modal/>:''}
     </div>
   )
 }
