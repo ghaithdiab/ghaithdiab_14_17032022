@@ -153,6 +153,7 @@ const HomePage = ({addEmployee}) => {
               <div className="input-container">
                 <label htmlFor="department">Department:</label>
                 <Select
+                  id='department'
                   options={departments}
                   aira-label="departments"
                   placeholder={departments[0].value}
