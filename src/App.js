@@ -19,7 +19,7 @@ function App() {
   const addEmployee=(newEmployee)=>{
     setDataEmployee([...dataEmployee,{...newEmployee}])
   }
-  console.log(dataEmployee)
+  // console.log(dataEmployee)
   return <div className="App">
     <BrowserRouter>
       <Routes>
