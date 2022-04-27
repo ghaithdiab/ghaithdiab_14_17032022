@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import Header from '../../components/Header/Header'
 import './EmployeePage.css'
 import DataTabels from 'table-component-react'
+
+/**
+ * 
+ * @param {object} EmployeesList 
+ */
 const EmployeesPage = ({EmployeesList}) => {
   const labels = [
     {text:"Id",value:"id"},
@@ -20,7 +25,6 @@ const EmployeesPage = ({EmployeesList}) => {
     <div className='background'>
       <Header/>
       <div className='container'>
-        {/* <DataTabel labels={exampleLabels} data={exampleData}/> */}
         <DataTabels labels={labels} data={EmployeesList}/>
       </div>
     </div>

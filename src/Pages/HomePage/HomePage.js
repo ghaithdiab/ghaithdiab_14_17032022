@@ -6,6 +6,12 @@ import Select from 'react-select'
 import { departments, states } from '../../data/data'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+
+
+/**
+ * 
+ * @param {object} addEmployee 
+ */
 const HomePage = ({ addEmployee }) => {
   const [Id, SetId] = useState(1)
   const [startDate, setStartDate] = useState(new Date())
