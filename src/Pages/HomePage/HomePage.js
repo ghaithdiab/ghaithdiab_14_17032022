@@ -6,9 +6,8 @@ import Select from 'react-select'
 import { departments, states } from '../../data/data'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import Modal from '../../components/Modal/Modal'
-const HomePage = ({addEmployee}) => {
-  const[Id,SetId]=useState(1)
+const HomePage = ({ addEmployee }) => {
+  const [Id, SetId] = useState(1)
   const [startDate, setStartDate] = useState(new Date())
   const [birthday, setBirthDay] = useState(String)
   const [state, setState] = useState(states[0].value)
@@ -20,7 +19,7 @@ const HomePage = ({addEmployee}) => {
     city: '',
     zipCode: '',
   })
-  const[open,setOpen]=useState(false)
+  const [open, setOpen] = useState(false)
   const handelInputChange = (e) => {
     const value = e.target.value
     setInfo({
@@ -30,28 +29,30 @@ const HomePage = ({addEmployee}) => {
   }
   const saveEmployee = (e) => {
     e.preventDefault()
-    SetId(Id+1);
-    const EmployeeData={
-      id:Id,
-      firstName:info.firstName,
-      lastName:info.lastName,
-      DateOfBrith:birthday.toLocaleDateString('en-US'),
-      StartDate:startDate.toLocaleDateString('en-Us'),
-      street:info.street,
-      city:info.city,
-      State:state,
-      zipCode:info.zipCode,
-      Department:department
+    SetId(Id + 1)
+    const EmployeeData = {
+      id: Id,
+      firstName: info.firstName,
+      lastName: info.lastName,
+      DateOfBrith: birthday.toLocaleDateString('en-US'),
+      StartDate: startDate.toLocaleDateString('en-Us'),
+      street: info.street,
+      city: info.city,
+      State: state,
+      zipCode: info.zipCode,
+      Department: department,
     }
     addEmployee(EmployeeData)
     setOpen(true)
     //rest inputs value
-    const inputs=document.getElementsByTagName('input')
-    for(let i=0;i<inputs.length;i++){
-      inputs[i].value=''
+    const inputs = document.getElementsByTagName('input')
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].value = ''
     }
   }
-  
+  const closeModal=()=>{
+    setOpen(false)
+  }
   return (
     <div className="background">
       <Header />
@@ -153,7 +154,7 @@ const HomePage = ({addEmployee}) => {
               <div className="input-container">
                 <label htmlFor="department">Department:</label>
                 <Select
-                  aria-label='department'
+                  aria-label="department"
                   options={departments}
                   aira-label="departments"
                   placeholder={departments[0].value}
@@ -163,13 +164,24 @@ const HomePage = ({addEmployee}) => {
             </div>
           </div>
           <div className="button">
-            <button className="submit" type='submit'>
+            <button className="submit" type="submit">
               Save
             </button>
           </div>
         </form>
       </div>
-      {open ? <Modal/>:''}
+      {open ? (
+        <div className="my-modal" onClick={() => closeModal()}>
+          <div className="modal-content">
+            <span className="close" onClick={() => closeModal()}>
+              &times;
+            </span>
+            <p>Employee successfully created</p>
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   )
 }
