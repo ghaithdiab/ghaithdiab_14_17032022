@@ -26,7 +26,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage addEmployee={addEmployee}/>}></Route>
+        <Route path="/ghaithdiab_14_17032022"element={<HomePage addEmployee={addEmployee}/>}></Route>
         <Route path="/Employees" element={<EmployeesPage EmployeesList={dataEmployee}/>}></Route>
+        <Route path="/ghaithdiab_14_17032022/Employees" element={<EmployeesPage EmployeesList={dataEmployee}/>}></Route>
         <Route path="/*" element={<ErrorPage/>}></Route>
       </Routes>
     </BrowserRouter>
